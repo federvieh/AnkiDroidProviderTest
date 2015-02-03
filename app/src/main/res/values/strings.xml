@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AnkiDroidProviderTest</string>
+    <string name="title_flashcard_detail">Flash card Detail</string>
+
+</resources>

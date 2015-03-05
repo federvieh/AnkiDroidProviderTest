@@ -73,7 +73,7 @@ public class FlashcardListFragment extends ListFragment implements LoaderManager
 //        } else {
 //            baseUri = Contacts.CONTENT_URI;
 //        }
-        baseUri = FlashCardsContract.CONTENT_URI;
+        baseUri = FlashCardsContract.Note.CONTENT_URI;
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
@@ -151,7 +151,7 @@ public class FlashcardListFragment extends ListFragment implements LoaderManager
                     long noteId = mCursor.getLong(0);
                     Log.i("FlashCardListFragment", "Item long clicked: " + noteId);
                     ContentResolver cr = getActivity().getContentResolver();
-                    Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
+                    Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
                     StringBuilder toast = new StringBuilder();
                     if(cursor.moveToFirst()){
                         Log.i("FlashCardListFragment", "Cursor for: " + noteId);
@@ -211,7 +211,7 @@ public class FlashcardListFragment extends ListFragment implements LoaderManager
 
         mAdapter = new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_2, null,
-                new String[] { "_id", "mid" },
+                new String[] { FlashCardsContract.Note._ID, FlashCardsContract.Note.FLDS },
                 new int[] { android.R.id.text1, android.R.id.text2 }, 0);
         setListAdapter(mAdapter);
     }

@@ -82,7 +82,7 @@ public class FlashcardDetailFragment extends ListFragment implements LoaderManag
         if(mHeaderView == null){
             mHeaderView = new TextView(getActivity());
             ContentResolver cr = getActivity().getContentResolver();
-            Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
+            Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
             StringBuilder noteContent = new StringBuilder();
             if(cursor.moveToFirst()){
                 Log.i("FlashCardListFragment", "Cursor for: " + noteId);
@@ -143,7 +143,7 @@ public class FlashcardDetailFragment extends ListFragment implements LoaderManag
                     values.put(FlashCardsContract.DataColumns.DATA1, editTextData1.getText().toString());
                     values.put(FlashCardsContract.DataColumns.DATA2, editTextData2.getText().toString());
                     ContentResolver cr = getActivity().getContentResolver();
-                    Uri noteUri = Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId));
+                    Uri noteUri = Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId));
                     Uri dataUri = Uri.withAppendedPath(noteUri, "data");
 
                     cr.update(dataUri, values, null, null);
@@ -171,7 +171,7 @@ public class FlashcardDetailFragment extends ListFragment implements LoaderManag
 
 //        final ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
         final ContentResolver cr = getActivity().getContentResolver();
-        final Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
+        final Cursor cursor = cr.query(Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId)), null, null, null, null);
         if(cursor.moveToFirst()){
             Log.i("FlashCardListFragment", "Cursor for: " + noteId);
             String[] columnNames = cursor.getColumnNames();
@@ -205,7 +205,7 @@ public class FlashcardDetailFragment extends ListFragment implements LoaderManag
                     }
                 }
                 if (values.size()>0){
-                    Uri noteUri = Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId));
+                    Uri noteUri = Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId));
 
                     cr.update(noteUri, values, null, null);
                 }
@@ -252,7 +252,7 @@ public class FlashcardDetailFragment extends ListFragment implements LoaderManag
         // sample only has one Loader, so we don't care about the ID.
         // First, pick the base URI to use depending on whether we are
         // currently filtering.
-        Uri noteUri = Uri.withAppendedPath(FlashCardsContract.CONTENT_URI, Long.toString(noteId));
+        Uri noteUri = Uri.withAppendedPath(FlashCardsContract.Note.CONTENT_URI, Long.toString(noteId));
         Uri dataUri = Uri.withAppendedPath(noteUri, "data");
 
         return new CursorLoader(getActivity(), dataUri,
